@@ -11,6 +11,8 @@ The Helix hybrid exchange consists of the following components
 
 # funding proxy
 
+Users will register with a `PrincipalId` they control. The `landlord` canister will keep user funds in an [account](https://internetcomputer.org/docs/current/references/ledger#_accounts) that is derived from the canister's `PrincipalId` and a user identifier (`uid`). The latter is allocated to the user (to his `PrincipalId` to be more precise) upon registration.
+
 The funding proxy is in charge of
 - user registration
 - allocating segregated deposit addresses for each user and blockchain supported
@@ -21,6 +23,7 @@ Please note that:
 1. any funds owned by a user will be kept in the corresponding `landlord` canister account or user-specific deposit addresses for non-ICP assets
 1. all accounts that hold user funds are controlled by the canister's `PrincipalId`
 
+[API docs](https://app.swaggerhub.com/apis/MUHAREM_2/funding-proxy_api/1.0.14)
 
 # keymaker
 
@@ -32,3 +35,24 @@ The `keymaker` service is responsible for
 - monitoring the blockchains supported for arriving deposits
 - withdrawals
 - transfer of funds between the funding and trading wallet
+
+[API docs](https://app.swaggerhub.com/apis/MUHAREM_2/keymaker-fund_api/1.0.4)
+
+
+# general principles / considerations
+
+* high-volume APIs use websockets whereas low-volume APIs https+REST
+* all APIs (except for the market data API) will be authenticated
+* backend services will use service accounts (key/secret) to authenticate to each other (example: `keymaker` to `funding-proxy`)
+* service account credentials (key/secret) will be rotated frequently (every N hours) (N=4h?)
+* key material (or any other sensitive data) must be
+  * encrypted at rest
+  * zeroized immediately after use (to limit exposure / damage from memory dumps)
+* we don't want to traverse the public internet in order to obtain key material or service account credentials
+* REST APIs calls need to protect against replay attacks by using a timestamp (5 seconds in the past or shorter)
+* we apply [defense in depth](https://en.wikipedia.org/wiki/Defense_in_depth_(computing)) to protect our systems
+* every backend service will have its own database encryption key that is rotated every K hours (K=24h?)
+* we want to use proven / open source tools if they exist and minimize building/maintaining such tools ourselves
+* all backend services will be coded in rust
+* all APIs must be rate limited to prevent abuse
+* amounts shall be passed as strings across APIs and be handled as decimal types in code (e.g. using a [package like this](https://pkg.go.dev/github.com/shopspring/decimal)) in order to avoid rounding issues
