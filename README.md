@@ -39,9 +39,16 @@ The `keymaker` service is responsible for
 [API docs](https://app.swaggerhub.com/apis/MUHAREM_2/keymaker-fund_api/1.0.4)
 
 
+# V12 trading engine
+
+The V12 trading engine was built from scratch to facilitate low-latency and high-volume order management for retail as well as institutional users and trading bots.
+It offers websockets based APIs for
+- [market data distribution](https://helix-ex.github.io/apidocs/docs/market-data/#market-data-api)
+- [order management](https://helix-ex.github.io/apidocs/docs/order-management/#order-management-api)
+
 # general principles / considerations
 
-* high-volume APIs use websockets whereas low-volume APIs https+REST
+* high-volume APIs use websockets whereas low-volume APIs use https+REST
 * all APIs (except for the market data API) will be authenticated
 * backend services will use service accounts (key/secret) to authenticate to each other (example: `keymaker` to `funding-proxy`)
 * service account credentials (key/secret) will be rotated frequently (every N hours) (N=4h?)
