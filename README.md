@@ -37,21 +37,16 @@ In order to trade a user needs to transfer funds from the funding to the trading
 - trading wallet funds in [omnibus addresses](https://www.investopedia.com/terms/o/omnibusaccount.asp) (one per chain)
 - a ledger that captures the per-user trading wallet balances i.e. how much of the omnibus address balance is owned by each user
 
+Similarly to `landlord` `niobe` also keeps its own persistent state that must be preserved across upgrades.
+
 # funding proxy
 
-Users will register with a `PrincipalId` they control. The `landlord` canister will keep user funds in an [account](https://internetcomputer.org/docs/current/references/ledger#_accounts) that is derived from the canister's `PrincipalId` and a user identifier (`uid`). The latter is allocated to the user (to his `PrincipalId` to be more precise) upon registration.
+The funding proxy is awrapper around the `landlord` smart contract and provides its services via a [rest api](https://app.swaggerhub.com/apis/MUHAREM_2/funding-proxy_api/).
+It facilitates the registration of new users (which includes the allocation of segregated funding balances), the retrieval of user data and the management of user email addresses.
 
-The funding proxy is in charge of
-- user registration
-- allocating segregated deposit addresses for each user and blockchain supported
+Please note that the `funding-proxy` service will have a copy of the user data in its encrypted database. The canister's copy will be regarded as the master record however.
 
-Please note that:
-
-1. the `funding-proxy` service will have a copy of the user data in its encrypted database. The canister's copy will be regarded as the master record however.
-1. any funds owned by a user will be kept in the corresponding `landlord` canister account or user-specific deposit addresses for non-ICP assets
-1. all accounts that hold user funds are controlled by the canister's `PrincipalId`
-
-[API docs](https://app.swaggerhub.com/apis/MUHAREM_2/funding-proxy_api/1.0.14)
+[API docs](https://app.swaggerhub.com/apis/MUHAREM_2/funding-proxy_api/)
 
 # keymaker
 
