@@ -2,12 +2,33 @@
 
 ![helix high-level design](docs/images/helix-design.png)
 
-The Helix hybrid exchange consists of the following components
+Helix markets is a hybrid exchange with components deployed on the [internet computer blockchain](https://internetcomputer.org/) as well as off the chain. It consists of the following building blocks:
 
-* helix web UI: will be used by humans for authentication, funding and trading
-* "[funding](https://matrix.fandom.com/wiki/The_Landlord)" proxy: exposes the user management and funding services performed by the "landlord" smart contract to the web UI; shields the rest of the system from the [complexity of interacting with an ICP smart contract](https://internetcomputer.org/docs/current/references/ic-interface-spec/#http-call-overview).
-* "[keymaker](https://matrix.fandom.com/wiki/The_Keymaker)": a service that provides funding use case integration between the "funding" proxy and the "V12" off-chain exchange
-* "V12": high-speed, low latency exchange running off the chain.
+- [`landlord`](https://matrix.fandom.com/wiki/The_Landlord) smart contract [deployed](https://a4gq6-oaaaa-aaaab-qaa4q-cai.raw.ic0.app/?id=ox6gn-2aaaa-aaaag-qb45a-cai) on the internet computer
+- [`niobe`](https://matrix.fandom.com/wiki/Niobe) smart contract [deployed](https://a4gq6-oaaaa-aaaab-qaa4q-cai.raw.ic0.app/?id=hbslw-tiaaa-aaaag-qb5oq-cai) on the internet computer
+- helix web UI: used by humans for authentication, funding and trading
+- funding proxy: exposes the user management services performed by the "landlord" smart contract to clients; shields the rest of the system from the [complexity of interacting with an ICP smart contract](https://internetcomputer.org/docs/current/references/ic-interface-spec/#http-call-overview).
+- [keymaker](https://matrix.fandom.com/wiki/The_Keymaker): a service that implements funding use cases i.e. deposits, withdrawals as well as transfers between the funding and the trading wallets.
+- V12: high-speed, low latency exchange running off the chain
+
+# smart contracts
+
+## landlord
+Responsible for user registration, the management of funding wallet addresses and the signing of withdrawal transactions (using [threshold ECDSA chain-key signatures](https://internetcomputer.org/docs/current/developer-docs/integrations/t-ecdsa)).
+
+Each registered user
+- has his own funding wallet with a set of of segregated funding addresses (one per chain supported by the exchange)
+- can observe the respective funding balances on-chain
+- can request withdrawals of funding balances
+
+Please note: `landlord` keeps its own persistent state with the following user data:
+- a mapping of [principal](https://support.dfinity.org/hc/en-us/articles/7365913875988-What-is-a-principal-) id -> helix user id (`huid`)
+- the set of funding wallet addresses for a user
+
+## niobe
+In order to trade a user needs to transfer funds from the funding to the trading wallet managed by `niobe`. `niobe` keeps
+- trading wallet funds in [omnibus addresses](https://www.investopedia.com/terms/o/omnibusaccount.asp) (one per chain)
+- a ledger that captures the per-user trading wallet balances i.e. how much of the omnibus address balance is owned by each user
 
 # funding proxy
 
