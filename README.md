@@ -62,10 +62,24 @@ The `keymaker` service is responsible for
 
 [API docs](https://app.swaggerhub.com/apis/MUHAREM_2/keymaker-fund_api/)
 
+# seraph
+
+`seraph` is used to both register new users as well as to authenticate registered users. It relies on the [internet identity](https://internetcomputer.org/internet-identity) system to do so.
+
+When a registered user logs in for the first time, `seraph` will generate the following credentials
+- a public/secret key pair for REST API authentication
+- an authentication token for the trading engine websocket
+
+The user may reset these credentials using the REST API below.
+
+[API docs](https://app.swaggerhub.com/apis/Helix-Markets/seraph/)
 
 # V12 trading engine
 
 The V12 trading engine was built from scratch to facilitate low-latency and high-volume order management for retail as well as institutional users and trading bots.
+
+The trading engine is orders of magnitude faster than `niobe` -- the balances kept by it are thus authoritative and the true representation of users' trading balances.
+
 It offers websockets based APIs for
 - [market data distribution](https://helix-ex.github.io/apidocs/docs/market-data/#market-data-api)
 - [order management](https://helix-ex.github.io/apidocs/docs/order-management/#order-management-api)
