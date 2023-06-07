@@ -73,17 +73,13 @@ It offers websockets based APIs for
 # general principles / considerations
 
 * high-volume APIs use websockets whereas low-volume APIs use https+REST
-* all APIs (except for the market data API) will be authenticated
+* all APIs (except for the market data API) are authenticated
 * backend services will use service accounts (key/secret) to authenticate to each other (example: `keymaker` to `funding-proxy`)
-* service account credentials (key/secret) will be rotated frequently (every N hours) (N=4h?)
-* key material (or any other sensitive data) must be
-  * encrypted at rest
-  * zeroized immediately after use (to limit exposure / damage from memory dumps)
+* service account credentials (key/secret) will be rotated frequently
+* key material (or any other sensitive data) is encrypted at rest
 * we don't want to traverse the public internet in order to obtain key material or service account credentials
-* REST APIs calls need to protect against replay attacks by using a timestamp (5 seconds in the past or shorter)
+* REST APIs calls protect against replay attacks by using a timestamp (5 seconds in the past or shorter)
 * we apply [defense in depth](https://en.wikipedia.org/wiki/Defense_in_depth_(computing)) to protect our systems
-* every backend service will have its own database encryption key that is rotated every K hours (K=24h?)
-* we want to use proven / open source tools if they exist and minimize building/maintaining such tools ourselves
-* all backend services will be coded in rust
+* every backend service will have its own database encryption key that is rotated every K hours
 * all APIs must be rate limited to prevent abuse
-* amounts shall be passed as strings across APIs and be handled as decimal types in code (e.g. using a [package like this](https://pkg.go.dev/github.com/shopspring/decimal)) in order to avoid rounding issues
+* amounts shall be passed as strings across APIs and be handled as decimal types in code (e.g. using a [package like this](https://docs.rs/bigdecimal/latest/bigdecimal/)) in order to avoid rounding issues
