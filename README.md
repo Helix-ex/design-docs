@@ -86,7 +86,7 @@ It offers websockets based APIs for
 
 # general principles / considerations
 
-* high-volume APIs use websockets whereas low-volume APIs use https+REST
+* high-volume APIs use websockets whereas low-volume APIs use REST
 * all APIs (except for the market data API) are authenticated
 * backend services will use service accounts (key/secret) to authenticate to each other (example: `keymaker` to `funding-proxy`)
 * service account credentials (key/secret) will be rotated frequently
