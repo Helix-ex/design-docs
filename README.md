@@ -45,7 +45,7 @@ Similarly to `landlord` `niobe` also keeps its own persistent state that must be
 The funding proxy is awrapper around the `landlord` smart contract and provides its services via a [rest api](https://app.swaggerhub.com/apis/MUHAREM_2/funding-proxy_api/).
 It facilitates the registration of new users (which includes the allocation of segregated funding wallet addresses), the retrieval of user data and the management of user email addresses.
 
-Please note that the `funding-proxy` service will have a copy of the user data in its encrypted database. The canister's copy will be regarded as the master record however.
+Please note that the `funding-proxy` service has a copy of the user data in its encrypted database. The canister's copy is regarded as the master record however.
 
 [API docs](https://app.swaggerhub.com/apis/MUHAREM_2/funding-proxy_api/)
 
@@ -88,12 +88,12 @@ It offers websockets based APIs for
 
 * high-volume APIs use websockets whereas low-volume APIs use REST
 * all APIs (except for the market data API) are authenticated
-* backend services will use service accounts (key/secret) to authenticate to each other (example: `keymaker` to `funding-proxy`)
-* service account credentials (key/secret) will be rotated frequently
+* backend services use service accounts (key/secret) to authenticate to each other (example: `keymaker` to `funding-proxy`)
+* service account credentials (key/secret) are rotated frequently
 * key material (or any other sensitive data) is encrypted at rest
 * we don't want to traverse the public internet in order to obtain key material or service account credentials
 * REST APIs calls protect against replay attacks by using a timestamp (5 seconds in the past or shorter)
 * we apply [defense in depth](https://en.wikipedia.org/wiki/Defense_in_depth_(computing)) to protect our systems
-* every backend service will have its own database encryption key that is rotated every K hours
+* every backend service has its own database encryption key that is rotated every K hours
 * all APIs must be rate limited to prevent abuse
 * amounts shall be passed as strings across APIs and be handled as decimal types in code (e.g. using a [package like this](https://docs.rs/bigdecimal/latest/bigdecimal/)) in order to avoid rounding issues
