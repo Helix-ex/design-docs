@@ -17,6 +17,17 @@ Please note:
 - all the components above -- except for the `landlord` and the `niobe` smart contracts -- are running off the chain
 - smart contracts are called [canisters](https://internetcomputer.org/docs/current/concepts/canisters-code) in ICP jargon
 
+# code base size in LOC
+|-------------------|-------|
+|component          | LOC   |
+|-------------------|-------|
+|funding-proxy      | 2939  |
+|keymaker           | 5066  |
+|seraph             | 1333  |
+|landlord           | 230   |
+|niobe              | 228   |
+|-------------------|-------|
+
 # smart contracts
 
 ## landlord
