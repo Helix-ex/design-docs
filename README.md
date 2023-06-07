@@ -19,7 +19,7 @@ Please note:
 
 # code base size in LOC
 |component          | LOC   |
-|-------------------|-------|
+|:-----------------:|------:|
 |funding-proxy      | 2939  |
 |keymaker           | 5066  |
 |seraph             | 1333  |
