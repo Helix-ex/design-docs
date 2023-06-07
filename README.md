@@ -1,4 +1,4 @@
-# High-level design
+# Helix markets -- system overview
 
 ![helix high-level design](docs/images/helix-design.png)
 
