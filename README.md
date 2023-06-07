@@ -2,7 +2,7 @@
 
 ![helix high-level design](docs/images/helix-design.png)
 
-Helix markets is a hybrid exchange with components deployed on the [internet computer blockchain](https://internetcomputer.org/) as well as off the chain. It consists of the following building blocks:
+Helix markets is a hybrid exchange with components deployed on the [internet computer blockchain](https://internetcomputer.org/) (ICP) as well as off the chain. It consists of the following building blocks:
 
 - [`landlord`](https://matrix.fandom.com/wiki/The_Landlord) smart contract [deployed](https://a4gq6-oaaaa-aaaab-qaa4q-cai.raw.ic0.app/?id=ox6gn-2aaaa-aaaag-qb45a-cai) on the internet computer
 - [`niobe`](https://matrix.fandom.com/wiki/Niobe) smart contract [deployed](https://a4gq6-oaaaa-aaaab-qaa4q-cai.raw.ic0.app/?id=hbslw-tiaaa-aaaag-qb5oq-cai) on the internet computer
@@ -10,6 +10,9 @@ Helix markets is a hybrid exchange with components deployed on the [internet com
 - funding proxy: exposes the user management services performed by the "landlord" smart contract to clients; shields the rest of the system from the [complexity of interacting with an ICP smart contract](https://internetcomputer.org/docs/current/references/ic-interface-spec/#http-call-overview).
 - [keymaker](https://matrix.fandom.com/wiki/The_Keymaker): a service that implements funding use cases i.e. deposits, withdrawals as well as transfers between the funding and the trading wallets.
 - V12: high-speed, low latency exchange running off the chain
+- [`seraph`](https://matrix.fandom.com/wiki/Seraph): a service that registers new users and authenticates registered users towards the off-chain part of the system
+
+Please note that all the components above -- except for `V12` -- have been written in the `rust` programming language.
 
 # smart contracts
 
@@ -21,9 +24,11 @@ Each registered user
 - can observe the respective funding balances on-chain
 - can request withdrawals of funding balances
 
-Please note: `landlord` keeps its own persistent state with the following user data:
-- a mapping of [principal](https://support.dfinity.org/hc/en-us/articles/7365913875988-What-is-a-principal-) id -> helix user id (`huid`)
-- the set of funding wallet addresses for a user
+Please note: `landlord` keeps its own persistent state with the following data: a map of
+- [principal](https://support.dfinity.org/hc/en-us/articles/7365913875988-What-is-a-principal-) id -> helix user id (`huid`)
+- `huid` -> funding wallet address (one per chain supported)
+
+This persistent state must be preserved across [smart contract upgrades](https://internetcomputer.org/docs/current/developer-docs/security/rust-canister-development-security-best-practices#consider-using-stable-memory-version-it-test-it).
 
 ## niobe
 In order to trade a user needs to transfer funds from the funding to the trading wallet managed by `niobe`. `niobe` keeps
