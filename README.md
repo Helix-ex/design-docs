@@ -15,6 +15,7 @@ Helix markets is a hybrid exchange with components deployed on the [internet com
 Please note:
 - all the components above -- except for `V12` -- have been written in the `rust` programming language
 - all the components above -- except for the `landlord` and the `niobe` smart contracts -- are running off the chain
+- smart contracts are called [canisters](https://internetcomputer.org/docs/current/concepts/canisters-code) in ICP jargon
 
 # smart contracts
 
@@ -42,7 +43,7 @@ Similarly to `landlord` `niobe` also keeps its own persistent state that must be
 # funding proxy
 
 The funding proxy is awrapper around the `landlord` smart contract and provides its services via a [rest api](https://app.swaggerhub.com/apis/MUHAREM_2/funding-proxy_api/).
-It facilitates the registration of new users (which includes the allocation of segregated funding balances), the retrieval of user data and the management of user email addresses.
+It facilitates the registration of new users (which includes the allocation of segregated funding wallet addresses), the retrieval of user data and the management of user email addresses.
 
 Please note that the `funding-proxy` service will have a copy of the user data in its encrypted database. The canister's copy will be regarded as the master record however.
 
@@ -59,7 +60,7 @@ The `keymaker` service is responsible for
 - withdrawals
 - transfer of funds between the funding and trading wallet
 
-[API docs](https://app.swaggerhub.com/apis/MUHAREM_2/keymaker-fund_api/1.0.4)
+[API docs](https://app.swaggerhub.com/apis/MUHAREM_2/keymaker-fund_api/)
 
 
 # V12 trading engine
