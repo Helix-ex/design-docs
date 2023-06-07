@@ -20,11 +20,14 @@ Please note:
 # code base size in LOC
 |component          | LOC   |
 |:-----------------:|------:|
-|funding-proxy      | 2939  |
-|keymaker           | 5066  |
+|funding-proxy      | 3391  |
+|keymaker           | 5226  |
 |seraph             | 1333  |
+|total (backend)    | 9950  |
+|                   |       |
 |landlord           | 230   |
 |niobe              | 228   |
+|total (canisters)  | 458   |
 
 # smart contracts
 
