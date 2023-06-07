@@ -9,10 +9,11 @@ Helix markets is a hybrid exchange with components deployed on the [internet com
 - helix web UI: used by humans for authentication, funding and trading
 - funding proxy: exposes the user management services performed by the "landlord" smart contract to clients; shields the rest of the system from the [complexity of interacting with an ICP smart contract](https://internetcomputer.org/docs/current/references/ic-interface-spec/#http-call-overview).
 - [keymaker](https://matrix.fandom.com/wiki/The_Keymaker): a service that implements funding use cases i.e. deposits, withdrawals as well as transfers between the funding and the trading wallets.
-- V12: high-speed, low latency exchange running off the chain
+- V12: high-speed, low latency trading engine
 - [`seraph`](https://matrix.fandom.com/wiki/Seraph): a service that registers new users and authenticates registered users towards the off-chain part of the system
 
 Please note that all the components above -- except for `V12` -- have been written in the `rust` programming language.
+Please note that all the components above -- except for the `landlord` and the `niobe` smart contracts -- are running off the chain.
 
 # smart contracts
 
