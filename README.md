@@ -18,7 +18,6 @@ Please note:
 - smart contracts are called [canisters](https://internetcomputer.org/docs/current/concepts/canisters-code) in ICP jargon
 
 # code base size in LOC
-|-------------------|-------|
 |component          | LOC   |
 |-------------------|-------|
 |funding-proxy      | 2939  |
@@ -26,7 +25,6 @@ Please note:
 |seraph             | 1333  |
 |landlord           | 230   |
 |niobe              | 228   |
-|-------------------|-------|
 
 # smart contracts
 
