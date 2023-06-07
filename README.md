@@ -12,8 +12,9 @@ Helix markets is a hybrid exchange with components deployed on the [internet com
 - V12: high-speed, low latency trading engine
 - [`seraph`](https://matrix.fandom.com/wiki/Seraph): a service that registers new users and authenticates registered users towards the off-chain part of the system
 
-Please note that all the components above -- except for `V12` -- have been written in the `rust` programming language.
-Please note that all the components above -- except for the `landlord` and the `niobe` smart contracts -- are running off the chain.
+Please note:
+- all the components above -- except for `V12` -- have been written in the `rust` programming language
+- all the components above -- except for the `landlord` and the `niobe` smart contracts -- are running off the chain
 
 # smart contracts
 
