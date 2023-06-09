@@ -20,10 +20,10 @@ Please note:
 # code base size in LOC
 |component          | LOC   |
 |:-----------------:|------:|
-|funding-proxy      | 3391  |
+|funding-proxy      | 4078  |
 |keymaker           | 5226  |
 |seraph             | 1333  |
-|total (backend)    | 9950  |
+|total (backend)    |10637  |
 |                   |       |
 |landlord           | 230   |
 |niobe              | 228   |
@@ -95,6 +95,16 @@ The trading engine is orders of magnitude faster than `niobe` -- the balances ke
 It offers websockets based APIs for
 - [market data distribution](https://helix-ex.github.io/apidocs/docs/market-data/#market-data-api)
 - [order management](https://helix-ex.github.io/apidocs/docs/order-management/#order-management-api)
+
+# user journeys
+- register new user
+- login registered user
+- deposit funds
+- transfer funds to trading wallet
+- transfer funds to funding wallet
+- register/verify first email address
+- register/verify subsequent email address
+- activate verified email address
 
 # general principles / considerations
 
