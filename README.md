@@ -54,7 +54,7 @@ Similarly to `landlord` `niobe` also keeps its own persistent state that must be
 
 # funding proxy
 
-The funding proxy is awrapper around the `landlord` smart contract and provides its services via a [rest api](https://app.swaggerhub.com/apis/MUHAREM_2/funding-proxy_api/).
+The `funding-proxy` is awrapper around the `landlord` smart contract and provides its services via a [rest api](https://app.swaggerhub.com/apis/MUHAREM_2/funding-proxy_api/).
 It facilitates the registration of new users (which includes the allocation of segregated funding wallet addresses), the retrieval of user data and the management of user email addresses.
 
 Please note that the `funding-proxy` service has a copy of the user data in its encrypted database. The canister's copy is regarded as the master record however.
@@ -106,8 +106,10 @@ It offers websockets based APIs for
 - register/verify subsequent email address
 - activate verified email address
 
-## register new user
-A user browses the web UI and clicks on the "connect" button. He is taken to the [internet identity](https://identity.ic0.app/) page to authenticate. If that worked the user is returned to the exchange web site with something called a "delegation envelope" containing a timestamp (how long is the enevelope valid?) and a `PrincipalId` identifying the user. The web UI first attempts to login the user (using seraph's [`POST /login`](https://app.swaggerhub.com/apis/Helix-Markets/seraph/1.0.3#/hm_ii_authentication/loginUser) endpoint). If that fails it assumes the user has not been registered yet and attempts to resgister it with the funding-proxy ([`POST /user`](https://app.swaggerhub.com/apis/MUHAREM_2/funding-proxy_api/1.0.15#/hm_ii_authentication/registerUser) endpoint)
+## logn / register user
+A user browses the web UI and clicks on the "connect" button. He is taken to the [internet identity](https://identity.ic0.app/) page to authenticate. If that worked the user is returned to the exchange web site with something called a "delegation envelope" containing a timestamp (how long is the envelope valid?) and a `PrincipalId` identifying the user. The web UI first attempts to login the user (using `seraph`'s [`POST /login`](https://app.swaggerhub.com/apis/Helix-Markets/seraph/1.0.3#/hm_ii_authentication/loginUser) endpoint). If that fails it assumes the user has not been registered yet and attempts to register the user with the `funding-proxy` ([`POST /user`](https://app.swaggerhub.com/apis/MUHAREM_2/funding-proxy_api/1.0.15#/hm_ii_authentication/registerUser) endpoint)
+
+Please note that the `funding-proxy` also allocates segregated deposit addresses for newly registered users (in collaboration with the `landlord` canister).
 
 # general principles / considerations
 
