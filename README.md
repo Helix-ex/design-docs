@@ -106,6 +106,9 @@ It offers websockets based APIs for
 - register/verify subsequent email address
 - activate verified email address
 
+## register new user
+A user browses the web UI and clicks on the "connect" button. He is taken to the [internet identity](https://identity.ic0.app/) page to authenticate. If that worked the user is returned to the exchange web site with something called a "delegation envelope" containing a timestamp (how long is the enevelope valid?) and a `PrincipalId` identifying the user. The web UI first attempts to login the user (using seraph's [`POST /login`](https://app.swaggerhub.com/apis/Helix-Markets/seraph/1.0.3#/hm_ii_authentication/loginUser) endpoint). If that fails it assumes the user has not been registered yet and attempts to resgister it with the funding-proxy ([`POST /user`](https://app.swaggerhub.com/apis/MUHAREM_2/funding-proxy_api/1.0.15#/hm_ii_authentication/registerUser) endpoint)
+
 # general principles / considerations
 
 * high-volume APIs use websockets whereas low-volume APIs use REST
