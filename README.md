@@ -20,10 +20,10 @@ Please note:
 # code base size in LOC
 |component          | LOC   |
 |:-----------------:|------:|
-|funding-proxy      | 4078  |
-|keymaker           | 5226  |
-|seraph             | 1333  |
-|total (backend)    |10637  |
+|funding-proxy      | 5226  |
+|keymaker           | 5334  |
+|seraph             | 1319  |
+|total (backend)    |11879  |
 |                   |       |
 |landlord           | 230   |
 |niobe              | 228   |
